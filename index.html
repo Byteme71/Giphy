@@ -5,53 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
     <script src="./assets/javascript/giphy.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Giphy Search</h1>
 
-<!-- buttons with different data id -->
+        <div id="animal-view"></div>
 
+        <form id="animal-form">
+          <label for="animal-input">Add an Animal</label>
+          <input type="text" id="animal-input"><br>
+          <input id="add-animal" type="submit" value="Add an animal">
+        </form>
 
-<script>
-var api =  "WolFArV1wDY5IstQyDJcacM8yKv9ImN7";
-var userSearch = "cats";
-var url = "http://api.giphy.com/v1/gifs/search?q=" + userSearch + "&api_key=" + api + "&limit=5";
+        <div id="gifs-appear-here">
+        </div>
 
-$.ajax({
-    url: url,
-    method: "GET"
-    })  
-    .then(function(response) {
-        console.log(response);
-        var images = response.data;
-
-        for(i=0;i<images.length;i++){
-            console.log(images[i].images.fixed_width.url)
-            $('body').append("<img src=" + images[i].images.fixed_width.url + ">");
-
-            // put into a function to execute when i need it to
-        }
-    })
-    .catch(function(err) {
-        console.log(err);
-    });
-        
-
-
-console.log('I bet I will happen first');
-</script>
+    </div>
 
 
 
 
 
 
-
-
-<!-- <script src="./assets/javascript/giphy.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script> -->
+<script src="./assets/javascript/giphy.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>
 </body>
 </html>
