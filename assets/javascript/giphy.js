@@ -48,7 +48,7 @@ function displayGiphy() {
 
     var api = "WolFArV1wDY5IstQyDJcacM8yKv9ImN7";
     var topic = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=" + api + "&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=" + api + "&limit=10";
     
 
     $.ajax({
