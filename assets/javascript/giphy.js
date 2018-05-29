@@ -1,7 +1,3 @@
-//makde a an array of topics
-//a for loop through the topics
-//
-
 
 $(document).ready ( function() { 
     // console.log( "document loaded" );
@@ -52,26 +48,59 @@ function displayGiphy() {
 
     var api = "WolFArV1wDY5IstQyDJcacM8yKv9ImN7";
     var topic = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=" + api + "&limit=5";
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=" + api + "&limit=10";
     
 
     $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-        console.log(response.data);
+        // console.log(response.data);
         var results = response.data;
 
         for (i = 0; i < results.length; i++){
             var animalDiv = $("<div>");
+            var p = $("<p>").text("Rating: " + results[i].rating);
             var animalImage = $("<img>");
 
-            animalImage.attr("src", results[i].images.fixed_height.url);
+            animalImage.attr("src", results[i].images.fixed_height_small_still.url);
+            $(animalImage).attr("data-state", "still");
             animalDiv.append(animalImage);
-
+            animalDiv.append(p);
             $("#gifs-appear-here").prepend(animalDiv);
+
+            // console.log(results[i].images.fixed_height_small.url);
+        
+
+            $(animalImage).on("click", function() {
+              // console.log("click");
+              results = response.data;
+              // console.log(response.data)
+            for (i = 0; i < results.length; i++){
+              // console.log(results[i]);
+            var state = $(this).attr("data-state");
+        
+            if (state === "still") {
+             
+                results = response.data;
+                // console.log(state)
+                $(animalImage).attr("data-state", "animate");
+                animalImage.attr("src", results[i].images.fixed_height_small.url);
+                // console.log(results[i].images.fixed_height_small.url);
+               
+              } else if (state === "animate"){
+                results = response.data;
+                // console.log(state)
+                $(animalImage).attr(state, "still");
+                animalImage.attr("src", results[i].images.fixed_height_small_still.url);
+              }
+            }
+            });
+            //   fixed_height_small
+
+        
         }
-    //   $("#animal-view").text(JSON.stringify(response));
+
       renderButtons();
     });
   }
@@ -88,27 +117,5 @@ function displayGiphy() {
 
 
 
-// $.ajax({
-//     url: queryUrl,
-//     method: "GET"
-//     })  
-//     .then(function(response) {
-//         console.log(response);
-//         var images = response.data;
-
-//         for(i=0;i<images.length;i++){
-//             console.log(images[i].images.fixed_width.url)
-//             $('body').append("<img src=" + images[i].images.fixed_width.url + ">");
-
-//             // put into a function to execute when i need it to
-//         }
-//     })
-//     .catch(function(err) {
-//         console.log(err);
-//     });
-        
-
-
-// console.log('I bet I will happen first');
 });
 
